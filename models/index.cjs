@@ -16,14 +16,17 @@ if (config.use_env_variable) {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
+// Cambié el slice de (-3) a (-4) ya que .cjs tiene 4 caracteres, la modificación
+// era necesaria para que la lógica filtre correctamente
+// los archivos de modelo con dicha extensión.
 fs
   .readdirSync(__dirname)
   .filter(file => {
     return (
       file.indexOf('.') !== 0 &&
       file !== basename &&
-      file.slice(-3) === '.js' &&
-      file.indexOf('.test.js') === -1
+      file.slice(-4) === '.cjs' &&
+      file.indexOf('.test.cjs') === -1
     );
   })
   .forEach(file => {
